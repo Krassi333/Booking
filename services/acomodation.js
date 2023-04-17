@@ -1,10 +1,11 @@
+
 const fs = require('fs');
 
 const fileName = './models/data.json';
 const data = JSON.parse(fs.readFileSync(fileName));
 
 async function persist() {
-    return new Promises((res, rej) => {
+    return new Promise((res, rej) => {
         fs.writeFile(fileName, JSON.stringify(data), (err) => {
             if (err == null) {
                 res();
@@ -15,8 +16,12 @@ async function persist() {
     });
 };
 
-function getAll() {
-    return data;
+function getAll(search, city, fromPrice, toPrice) {
+    return data.filter(x => x.name.includes(search))
+        //.filter(x => x.city.includes(city))
+        //.filter(x => x.price <= fromPrice && x.price >= toPrice);
+
+
 }
 
 function getById(id) {
@@ -35,7 +40,7 @@ async function create(room) {
         "beds": Number(room.beds),
         "description": room.description,
         "price": Number(room.price),
-        "imageUrl": room.imageUrl
+        "imageUrl": room.imgUrl
     };
 
     data.push(roomData);
