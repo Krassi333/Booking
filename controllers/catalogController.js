@@ -20,6 +20,7 @@ router.get('/:id', async (req, res) => {
     const data =await getById(id);
     
     if (data) {
+       
         res.render('details', { data });
     } else {
         res.render('roomNotFound', { id })
