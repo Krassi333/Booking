@@ -1,5 +1,5 @@
 <section id="catalog-section">
-    {{#with room}}
+    {{#with data}}
     <h1 class="item">{{name}}</h1>
     <div class="item padded">
 
@@ -7,7 +7,7 @@
 
             <div class="col">
 
-                <img src="{{imgUrl}}" class="img-large">
+                <img src="{{imageUrl}}" class="img-large">
 
             </div>
 
@@ -21,16 +21,16 @@
                         Price per night: <strong>{{price}}€</strong>
                     </div>
                     <ul class="catalog">
-                        {{#each facilities}}
+                        {{#each facilities}} 
                         <li>{{label}} <img class="facility-icon" src="{{iconUrl}}"></li>
-                        {{/each}}
+                         {{/each}}
                     </ul>
 
-                    {{#if isOwner}}
+                    <!-- {{#if isOwner}} -->
                     <a class="action" href="/room/{{_id}}/edit">Edit</a>
                     <a class="action" href="/facility/{{_id}}/decorateRoom">Facilities</a>
                     <a class="action" href="/room/{{_id}}/delete">Delete</a>
-                    {{/if}}
+                   <!-- {{/if}}  -->
                 </div>
 
             </div>
