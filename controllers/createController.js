@@ -9,8 +9,8 @@ router.post('/', async (req, res) => {
     const data = req.body;
 
     try {
-        const result = await create(data);
-        res.redirect('/catalog/'+result.id);
+        const result = await create(data, req.user._id);
+        res.redirect('/catalog/' + result.id);
     } catch {
 
         res.render('create');
