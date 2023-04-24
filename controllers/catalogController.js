@@ -9,18 +9,22 @@ router.get('/', async (req, res) => {
     const toPrice = Number(req.query.toPrice) || 1000;
 
     const data = await getAll(search);
-    
+
 
     res.render('catalog', { data, search, city, fromPrice, toPrice });
 });
 
 router.get('/:id', async (req, res) => {
-    
+
     const id = req.params.id;
-    const data =await getById(id);
-    
+    const data = await getById(id);
+
+    if (req.user && req.user._id == data.owner) {
+        data.isOwner = true;
+    }
+
     if (data) {
-       
+
         res.render('details', { data });
     } else {
         res.render('roomNotFound', { id })
