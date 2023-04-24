@@ -1,7 +1,8 @@
 const hbs = require('express-handlebars');
 const express = require('express');
-const cookieParser=require('cookie-parser');
-const auth=require('../middlewares/auth');
+const cookieParser = require('cookie-parser');
+const auth = require('../middlewares/auth');
+const userNav=require('../middlewares/userNav');
 
 const secret = 'gsdfghjkl';
 
@@ -15,4 +16,5 @@ module.exports = (app) => {
     app.use('/static', express.static('static'));  //all req to static have acsess to file static
     app.use(cookieParser());  //add middleware
     app.use(auth(secret)); //add middleware
+    app.use(userNav());
 }
