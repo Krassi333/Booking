@@ -8,7 +8,9 @@ const roomSchema = new Schema({
     "description": { type: String, require: true },
     "price": { type: Number, require: true, min: 0.01 },
     "imageUrl": { type: String },
-    facilities: { type: [Types.ObjectId], default: [], ref: 'Facility' }
+    "facilities": { type: [Types.ObjectId], default: [], ref: 'Facility' },
+    "owner": { type: Types.ObjectId, ref: 'User', required: true }
+
 });
 
 const Room = model('Room', roomSchema);
