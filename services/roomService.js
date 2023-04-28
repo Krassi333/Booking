@@ -1,4 +1,4 @@
-const Room=require('../models/Room');
+const Room = require('../models/Room');
 /*const fs = require('fs');
 
 const fileName = './models/data.json';
@@ -29,23 +29,44 @@ function getById(id) {
 
 
 
-async function create(room) {
+async function create(room, ownerId) {
     const roomData = {
         "city": room.city,
         "name": room.name,
         "beds": Number(room.beds),
         "description": room.description,
         "price": Number(room.price),
-        "imageUrl": room.imgUrl
+        "imageUrl": room.imageUrl,
+        "owner": ownerId
     };
 
-    const result=await Room.create(roomData);
-   return result;
+    const result = await Room.create(roomData);
+    return result;
 }
 
+async function update(roomId, roomData) {
+    const room = await Room.findById(roomId);
+
+    room.city = roomData.city;
+    room.name = roomData.name;
+    room.beds = Number(roomData.beds);
+    room.description = roomData.description;
+    room.price = Number(roomData.price);
+    room.imageUrl = roomData.imageUrl;
+
+    await room.save();
+
+    return room;
+}
+
+async function deleteById(roomId){
+return Room.findByIdAndRemove(roomId);
+}
 
 module.exports = {
     getAll,
     getById,
-    create
+    create,
+    update,
+    deleteById
 }
